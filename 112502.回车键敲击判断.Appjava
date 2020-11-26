@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Game {
+    JPanel myPanel=new JPanel();
+    JTextArea textArea_A=new JTextArea();
+    JTextArea textArea_B=new JTextArea();
+    //构造方法
+    public Game() {
+        textArea_A.setText("猜猜谁最丑？");
+
+
+        textArea_A.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                   if(textArea_A.getText().equals("罗广金")){
+                       textArea_B.setText("回答正确！");
+                   }
+                   else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                       textArea_B.append("答错，给钱！");
+                   }
+                }
+
+            }
+        });
+    }
+    //显示窗体方法
+    void go(){
+        textArea_A.setBounds(100,100,256,128);
+        textArea_B.setBounds(100,300,256,128);
+        textArea_A.setBackground(Color.orange);
+        textArea_B.setBackground(Color.yellow);
+        myPanel.add(textArea_A);
+        myPanel.add(textArea_B);
+
+        JFrame frame = new JFrame("魔镜");
+        myPanel.setLayout(null);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,512,720);
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Game().go();
+    }
+}
