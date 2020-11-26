@@ -1,0 +1,49 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class App {
+    JPanel myPanel=new JPanel();
+    JLabel label_bg_img=new JLabel();
+    JLabel label_score=new JLabel();
+    int score,score1,score2,score3;
+    //构造方法
+    public App() {
+       myPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+//                System.out.println(e.getX()+","+e.getY());
+                if (e.getX()<110 && e.getY()<428){
+                    score1=1;
+                    score=score1+score2+score3;
+                    label_score.setText("得分："+String.valueOf(score));
+
+                }
+            }
+        });
+    }
+    //显示窗体方法
+    void go(){
+        label_score.setText("得分：");
+label_score.setForeground(Color.WHITE);
+        label_score.setBounds(20,20,100,100);
+        java.net.URL imgURL = App.class.getResource("img/jay.jpg");
+        label_bg_img.setIcon(new ImageIcon(imgURL));
+        label_bg_img.setBounds(0,0,1000,800);
+        JFrame frame = new JFrame("猜谜游戏");
+        myPanel.setLayout(null);
+        myPanel.add(label_score);
+        myPanel.add(label_bg_img);
+
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,1017,840);
+        //frame.pack();
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
