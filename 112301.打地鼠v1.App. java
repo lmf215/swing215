@@ -1,0 +1,43 @@
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class App {
+    private JPanel mypanel=new JPanel();
+    private JLabel label_mouse=new JLabel();
+    JLabel label_background=new JLabel();
+JLabel label_score=new JLabel();
+int i=0;
+    public App() {
+        label_mouse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                label_mouse.setBounds((int)(Math.random()*10%10*50),(int)(Math.random()*10%10*50),60,60);
+            i++;
+                label_score.setText(String.valueOf(i));
+            }
+        });
+    }
+    void go(){
+        mypanel.setLayout(null);
+        java.net.URL imgURL1=App.class.getResource("mouse.gif");
+        label_mouse.setIcon(new ImageIcon(imgURL1));
+        java.net.URL imgURL2=App.class.getResource("background.jpg");
+        label_background.setIcon(new ImageIcon(imgURL2));
+        label_mouse.setBounds(100,100,60,60);
+        label_background.setBounds(0,0,1024,720);
+        mypanel.add(label_score);
+        mypanel.add(label_mouse);
+        mypanel.add(label_background);
+        JFrame frame = new JFrame("打地鼠");
+        frame.setBounds(100,100,1024,720);
+        frame.setContentPane(mypanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
+
